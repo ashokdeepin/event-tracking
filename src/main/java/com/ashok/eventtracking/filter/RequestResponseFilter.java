@@ -1,6 +1,7 @@
 package com.ashok.eventtracking.filter;
 
 import com.ashok.eventtracking.model.Event;
+import com.ashok.eventtracking.service.MessageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class RequestResponseFilter implements Filter {
     private final Logger LOG = LoggerFactory.getLogger(RequestResponseFilter.class);
 
     @Autowired
-    private KafkaTemplate<String, Event> kafkaTemplate;
+    private MessageService<Event> messageService;
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -36,7 +37,7 @@ public class RequestResponseFilter implements Filter {
         LOG.info(
                 "Logging Request  {} : {}", req.getMethod(),
                 req.getRequestURI());
-        kafkaTemplate.send("application.events",constructEventObject(req));
+        messageService.send("application.events",constructEventObject(req));
         filterChain.doFilter(servletRequest, servletResponse);
         LOG.info(
                 "Logging Response :{}",

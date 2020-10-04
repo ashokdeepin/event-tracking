@@ -10,15 +10,15 @@ import java.io.Serializable;
  * 03/10/20
  */
 
-public class RedisEventLastAccess implements Serializable {
+public class EventLastAccess implements Serializable {
 
     private String id;
     private long lastAccessTimeStamp;
 
-    public RedisEventLastAccess() {
+    public EventLastAccess() {
     }
 
-    public RedisEventLastAccess(String id, long lastAccessTime) {
+    public EventLastAccess(String id, long lastAccessTime) {
         this.id = id;
         this.lastAccessTimeStamp = lastAccessTime;
     }

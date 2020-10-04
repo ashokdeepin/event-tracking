@@ -1,8 +1,7 @@
 package com.ashok.eventtracking.job;
 
-import com.ashok.eventtracking.model.RedisEventLastAccess;
-import com.ashok.eventtracking.service.RedisCacheService;
-import org.redisson.api.RKeys;
+import com.ashok.eventtracking.model.EventLastAccess;
+import com.ashok.eventtracking.service.CacheService;
 import org.redisson.api.RMapCache;
 import org.redisson.api.RReadWriteLock;
 import org.redisson.api.RedissonClient;
@@ -15,6 +14,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.time.Instant;
+import java.util.List;
 
 /**
  * Job scheduled every second to check if there are any events in redis central data store which crossed
@@ -30,7 +30,7 @@ public class EventTimeOutCalculatorJob {
     private final Logger LOG = LoggerFactory.getLogger(EventTimeOutCalculatorJob.class);
 
     @Autowired
-    private RedissonClient redissonClient;
+    private CacheService<String, EventLastAccess> cacheService;
 
     @Value("${event.mapName:eventMap}")
     private String mapName;
@@ -43,22 +43,20 @@ public class EventTimeOutCalculatorJob {
 
         LOG.debug("EventTimeOutCalculatorJob triggered");
 
-        RMapCache<String, RedisEventLastAccess> map = redissonClient.getMapCache(mapName);
-        RReadWriteLock rReadWriteLock = map.getReadWriteLock(mapName);
-        rReadWriteLock.readLock().lock();
+        List<EventLastAccess> values = cacheService.getAllValues(mapName);
         try{
-            for(RedisEventLastAccess event : map.readAllValues()){
-                calculateTimeOut(event, map);
+            for(EventLastAccess event : values){
+                calculateTimeOut(event);
             }
-        }finally {
-            rReadWriteLock.readLock().unlock();
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
-    private void calculateTimeOut(RedisEventLastAccess event, RMapCache<String, RedisEventLastAccess> map){
+    private void calculateTimeOut(EventLastAccess event){
             if(Instant.now().toEpochMilli() - event.getLastAccessTime() > idleTimeout){
                 LOG.info("Idle Time out triggered for ipAddress={}", event.getId());
-                map.remove(event.getId());
+                cacheService.remove(mapName,event.getId());
             }
     }
 }
