@@ -32,7 +32,7 @@ public class LocalCacheService<K,V> implements  CacheService<K,V>{
             lock.lock();
             if(localCache.containsKey(mapName)) {
                 Map<K, V> map = localCache.get(mapName);
-                map.putIfAbsent(key, value);
+                map.put(key, value);
             }else{
                 Map<K,V> map = new HashMap<>();
                 map.put(key, value);

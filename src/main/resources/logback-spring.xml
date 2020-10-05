@@ -27,7 +27,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.ashok" level="debug" additivity="false">
+    <logger name="com.ashok" level="info" additivity="false">
         <appender-ref ref="rolling-file"/>
         <appender-ref ref="console"/>
     </logger>

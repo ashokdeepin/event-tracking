@@ -34,12 +34,12 @@ public class RequestResponseFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse res = (HttpServletResponse) servletResponse;
-        LOG.info(
+        LOG.debug(
                 "Logging Request  {} : {}", req.getMethod(),
                 req.getRequestURI());
         messageService.send("application.events",constructEventObject(req));
         filterChain.doFilter(servletRequest, servletResponse);
-        LOG.info(
+        LOG.debug(
                 "Logging Response :{}",
                 res.getContentType());
     }

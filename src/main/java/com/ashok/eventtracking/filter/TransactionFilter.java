@@ -21,12 +21,12 @@ public class TransactionFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
-        LOG.info(
+        LOG.debug(
                 "Starting a transaction for req : {}",
                 req.getRequestURI());
 
         filterChain.doFilter(servletRequest, servletResponse);
-        LOG.info(
+        LOG.debug(
                 "Committing a transaction for req : {}",
                 req.getRequestURI());
     }

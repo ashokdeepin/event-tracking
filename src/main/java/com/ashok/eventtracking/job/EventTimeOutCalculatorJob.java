@@ -14,6 +14,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -55,7 +56,7 @@ public class EventTimeOutCalculatorJob {
 
     private void calculateTimeOut(EventLastAccess event){
             if(Instant.now().toEpochMilli() - event.getLastAccessTime() > idleTimeout){
-                LOG.info("Idle Time out triggered for ipAddress={}", event.getId());
+                LOG.info("Idle Time out triggered [ip-address={},currentTime={}, lastActivityTime={}]", event.getId(), new Date(), new Date(event.getLastAccessTime()));
                 cacheService.remove(mapName,event.getId());
             }
     }

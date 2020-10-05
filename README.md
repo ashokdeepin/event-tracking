@@ -44,7 +44,34 @@ If distributed profile to be activated, need to satisfy the below pre-requisite.
 - Install kafka and configure to default port.
 - Install Redis with default port configuration.
  
-When the application is first built, it will create a database file in the directory specified in the ```application.properties``` file. 
+When the application is first built, it will create a database file in the directory specified in the ```application.properties``` file.
+
+### Sample run
+I have tested this with single client using postman to trigger the activity to the application and below is the sample log out put of the same.
+```sh
+05-10-2020 08:06:02.791 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  c.a.e.listeners.EventKafkaListener.eventListener - [kafka] Client activity received :[ip-address=0:0:0:0:0:0:0:1,activityTime=Mon Oct 05 08:06:02 IST 2020]
+05-10-2020 08:06:04.620 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  c.a.e.listeners.EventKafkaListener.eventListener - [kafka] Client activity received :[ip-address=0:0:0:0:0:0:0:1,activityTime=Mon Oct 05 08:06:04 IST 2020]
+05-10-2020 08:06:05.605 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  c.a.e.listeners.EventKafkaListener.eventListener - [kafka] Client activity received :[ip-address=0:0:0:0:0:0:0:1,activityTime=Mon Oct 05 08:06:05 IST 2020]
+05-10-2020 08:06:08.618 [scheduling-1] INFO  c.a.e.job.EventTimeOutCalculatorJob.calculateTimeOut - Idle Time out triggered [ip-address=0:0:0:0:0:0:0:1,currentTime=Mon Oct 05 08:06:08 IST 2020, lastActivityTime=Mon Oct 05 08:06:05 IST 2020]
+05-10-2020 08:06:10.820 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  c.a.e.listeners.EventKafkaListener.eventListener - [kafka] Client activity received :[ip-address=0:0:0:0:0:0:0:1,activityTime=Mon Oct 05 08:06:10 IST 2020]
+05-10-2020 08:06:11.609 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  c.a.e.listeners.EventKafkaListener.eventListener - [kafka] Client activity received :[ip-address=0:0:0:0:0:0:0:1,activityTime=Mon Oct 05 08:06:11 IST 2020]
+05-10-2020 08:06:12.434 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  c.a.e.listeners.EventKafkaListener.eventListener - [kafka] Client activity received :[ip-address=0:0:0:0:0:0:0:1,activityTime=Mon Oct 05 08:06:12 IST 2020]
+05-10-2020 08:06:13.040 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  c.a.e.listeners.EventKafkaListener.eventListener - [kafka] Client activity received :[ip-address=0:0:0:0:0:0:0:1,activityTime=Mon Oct 05 08:06:13 IST 2020]
+05-10-2020 08:06:13.574 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  c.a.e.listeners.EventKafkaListener.eventListener - [kafka] Client activity received :[ip-address=0:0:0:0:0:0:0:1,activityTime=Mon Oct 05 08:06:13 IST 2020]
+05-10-2020 08:06:14.325 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  c.a.e.listeners.EventKafkaListener.eventListener - [kafka] Client activity received :[ip-address=0:0:0:0:0:0:0:1,activityTime=Mon Oct 05 08:06:14 IST 2020]
+05-10-2020 08:06:17.613 [scheduling-1] INFO  c.a.e.job.EventTimeOutCalculatorJob.calculateTimeOut - Idle Time out triggered [ip-address=0:0:0:0:0:0:0:1,currentTime=Mon Oct 05 08:06:17 IST 2020, lastActivityTime=Mon Oct 05 08:06:14 IST 2020]
+05-10-2020 08:06:19.406 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  c.a.e.listeners.EventKafkaListener.eventListener - [kafka] Client activity received :[ip-address=0:0:0:0:0:0:0:1,activityTime=Mon Oct 05 08:06:19 IST 2020]
+05-10-2020 08:06:19.975 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  c.a.e.listeners.EventKafkaListener.eventListener - [kafka] Client activity received :[ip-address=0:0:0:0:0:0:0:1,activityTime=Mon Oct 05 08:06:19 IST 2020]
+05-10-2020 08:06:20.761 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  c.a.e.listeners.EventKafkaListener.eventListener - [kafka] Client activity received :[ip-address=0:0:0:0:0:0:0:1,activityTime=Mon Oct 05 08:06:20 IST 2020]
+05-10-2020 08:06:21.360 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  c.a.e.listeners.EventKafkaListener.eventListener - [kafka] Client activity received :[ip-address=0:0:0:0:0:0:0:1,activityTime=Mon Oct 05 08:06:21 IST 2020]
+05-10-2020 08:06:21.956 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  c.a.e.listeners.EventKafkaListener.eventListener - [kafka] Client activity received :[ip-address=0:0:0:0:0:0:0:1,activityTime=Mon Oct 05 08:06:21 IST 2020]
+05-10-2020 08:06:25.614 [scheduling-1] INFO  c.a.e.job.EventTimeOutCalculatorJob.calculateTimeOut - Idle Time out triggered [ip-address=0:0:0:0:0:0:0:1,currentTime=Mon Oct 05 08:06:25 IST 2020, lastActivityTime=Mon Oct 05 08:06:21 IST 2020]
+05-10-2020 08:06:28.801 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  c.a.e.listeners.EventKafkaListener.eventListener - [kafka] Client activity received :[ip-address=0:0:0:0:0:0:0:1,activityTime=Mon Oct 05 08:06:28 IST 2020]
+05-10-2020 08:06:29.388 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  c.a.e.listeners.EventKafkaListener.eventListener - [kafka] Client activity received :[ip-address=0:0:0:0:0:0:0:1,activityTime=Mon Oct 05 08:06:29 IST 2020]
+05-10-2020 08:06:32.614 [scheduling-1] INFO  c.a.e.job.EventTimeOutCalculatorJob.calculateTimeOut - Idle Time out triggered [ip-address=0:0:0:0:0:0:0:1,currentTime=Mon Oct 05 08:06:32 IST 2020, lastActivityTime=Mon Oct 05 08:06:29 IST 2020]
+
+
+``` 
 
 ### Curl Tests
 

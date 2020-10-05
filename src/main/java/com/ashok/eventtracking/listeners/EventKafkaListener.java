@@ -34,7 +34,7 @@ public class EventKafkaListener {
 
     @KafkaListener(topics = "application.events", groupId = "eventGroup")
     void eventListener(Event event){
-        LOG.info("message received from kafka :[{}]", event);
+        LOG.info("[kafka] Client activity received :[ip-address={},activityTime={}]", event.getIpAddress(), event.getRequestTime());
         EventLastAccess eventLastAccess = new EventLastAccess(event.getIpAddress(), Instant.now().toEpochMilli());
         cacheService.put("eventMap", eventLastAccess.getId(), eventLastAccess, 6);
         eventService.addEvent(event);

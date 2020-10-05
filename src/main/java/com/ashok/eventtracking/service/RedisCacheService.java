@@ -35,7 +35,7 @@ public class RedisCacheService<K,V> implements CacheService<K,V> {
         RReadWriteLock rReadWriteLock = map.getReadWriteLock(key);
         rReadWriteLock.writeLock().lock();
         try{
-            map.fastPutIfAbsent(key, value, ttlInSecs, TimeUnit.SECONDS);
+            map.fastPut(key, value, ttlInSecs, TimeUnit.SECONDS);
         } finally {
             rReadWriteLock.writeLock().unlock();
         }
